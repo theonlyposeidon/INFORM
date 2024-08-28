@@ -58,6 +58,7 @@ $htmlTemplate = <<<EOT
     <img class="logo" src="cid:image001" alt="Goulburn-Murray Water Logo">
   </div>
   <div class="date">
+    {TODAYDATE}
   </div>
   <div class="container">
     <div class="info">
@@ -81,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $informType = $_POST['informType'];
   $systemName = $_POST['systemName'];
   $insertDate = $_POST['insertDate'];
-  $insertTodayDate = date("l, j M Y"); // Format: DDDD, dd MMM yyyy
+  $todayDate = date("D, j M Y"); // Format: DDD, dd MMM yyyy
 
   // Generate the INFORM message based on the user's selection
   switch ($informType) {
@@ -101,6 +102,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
   // Replace the INSERTDATE placeholder with the user-input date
   $htmlTemplate = str_replace('{INSERTDATE}', $insertDate, $htmlTemplate);
+
+  // Replace the TODAYDATE placeholder with the current date
+  $htmlTemplate = str_replace('{TODAYDATE}', $todayDate, $htmlTemplate);
 
   // Output the generated HTML template
   echo $htmlTemplate;
