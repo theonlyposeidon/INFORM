@@ -55,7 +55,7 @@ $htmlTemplate = <<<EOT
 </head>
 <body>
   <div class="header">
-    <img class="logo" src="cid:image001" alt="Goulburn-Murray Water Logo">
+    <img class="logo" src="images/image001.png" alt="Goulburn-Murray Water Logo">
   </div>
   <div class="date">
     {TODAYDATE}
