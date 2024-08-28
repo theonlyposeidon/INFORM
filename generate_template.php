@@ -81,8 +81,8 @@ EOT;
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $informType = $_POST['informType'];
   $systemName = $_POST['systemName'];
-  $insertDate = $_POST['insertDate'];
-  $todayDate = date("D, j M Y"); // Format: DDD, dd MMM yyyy
+  $insertDate = date_format($_POST['insertDate'], "l, d F Y");
+  $todayDate = date("l, d F Y"); // Format: DDD, dd MMM yyyy
 
   // Generate the INFORM message based on the user's selection
   switch ($informType) {
