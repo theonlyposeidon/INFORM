@@ -86,8 +86,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   // Generate the INFORM message based on the user's selection
   switch ($informType) {
     case 'unplannedOutage':
-      $informMessage = "INFORM: Unplanned Outage - $system
-          case 'unplannedOutage':
       $informMessage = "INFORM: Unplanned Outage - $systemName";
       break;
     case 'plannedOutage':
