@@ -87,3 +87,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   switch ($informType) {
     case 'unplannedOutage':
       $informMessage = "INFORM: Unplanned Outage - $system
+          case 'unplannedOutage':
+      $informMessage = "INFORM: Unplanned Outage - $systemName";
+      break;
+    case 'plannedOutage':
+      $informMessage = "INFORM: Planning Outage - $systemName, $insertDate";
+      break;
+    case 'newProcedure':
+      $informMessage = "INFORM: New Procedure";
+      break;
+  }
+
+  // Replace the placeholder with the generated INFORM message
+  $htmlTemplate = str_replace('{INFORMMESSAGE}', $informMessage, $htmlTemplate);
+
+  // Replace the INSERTDATE placeholder with the user-input date
+  $htmlTemplate = str_replace('{INSERTDATE}', $insertDate, $htmlTemplate);
+
+  // Output the generated HTML template
+  echo $htmlTemplate;
+}
+?>
