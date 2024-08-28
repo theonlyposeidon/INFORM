@@ -59,7 +59,6 @@ h1 {
   <img class="logo" src="cid:image001" alt="Goulburn-Murray Water Logo">
 </div>
 <div class="date">
-<p>{INSERTTODAYDATE}</p>
 </div>
 <div class="container">
   <div class="info">
@@ -79,21 +78,38 @@ h1 {
 EOT;
 
 // Create a simple form to input the variables
-echo '<form action="" method="post">';
-echo '<label for="insertTodayDate">Today\'s Date:</label><br>';
-echo '<input type="text" id="insertTodayDate" name="insertTodayDate" value="' . date("Y-m-d") . '" readonly><br><br>';
-echo '<label for="insertDate">Insert Date:</label><br>';
-echo '<input type="date" id="insertDate" name="insertDate"><br><br>';
-echo '<input type="submit" value="Generate Template">';
+echo '<!DOCTYPE html>';
+echo '<html>';
+echo '<head>';
+echo '<title>Goulburn-Murray Water</title>';
+echo '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">';
+echo '</head>';
+echo '<body>';
+echo '<div class="container">';
+echo '<form action="" method="post" class="form-horizontal">';
+echo '<div class="form-group">';
+echo '<label for="insertDate" class="col-sm-2 control-label">Insert Date:</label>';
+echo '<div class="col-sm-10">';
+echo '<input type="date" id="insertDate" name="insertDate" class="form-control">';
+echo '</div>';
+echo '</div>';
+echo '<div class="form-group">';
+echo '<div class="col-sm-offset-2 col-sm-10">';
+echo '<input type="submit" value="Generate Template" class="btn btn-primary">';
+echo '</div>';
+echo '</div>';
 echo '</form>';
+echo '</div>';
+echo '</body>';
+echo '</html>';
 
 // Process the form submission
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $insertDate = $_POST['insertDate'];
-  $insertTodayDate = $_POST['insertTodayDate'];
+  $insertTodayDate = date("l, j M Y"); // Format: DDDD, dd MMM yyyy
 
   // Replace the variables in the HTML template
-  $htmlBody = str_replace(array('{INSERTDATE}', '{INSERTTODAYDATE}'), array($insertDate, $insertTodayDate), $htmlTemplate);
+  $htmlBody = str_replace(array('{INSERTDATE}', '{INSERTTODAYDATE}'), array(date("l, j M Y", strtotime($insertDate)), $insertTodayDate), $htmlTemplate);
 
   // Display the generated HTML template as a preview
   echo '<h2>Generated HTML Template Preview:</h2>';
@@ -101,3 +117,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   echo $htmlBody;
   echo '</div>';
 }
+?>
