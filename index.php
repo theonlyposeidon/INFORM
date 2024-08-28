@@ -80,10 +80,10 @@ EOT;
 
 // Create a simple form to input the variables
 echo '<form action="" method="post">';
+echo '<label for="insertTodayDate">Today\'s Date:</label><br>';
+echo '<input type="text" id="insertTodayDate" name="insertTodayDate" value="' . date("Y-m-d") . '" readonly><br><br>';
 echo '<label for="insertDate">Insert Date:</label><br>';
-echo '<input type="text" id="insertDate" name="insertDate"><br><br>';
-echo '<label for="insertTodayDate">Insert Today Date:</label><br>';
-echo '<input type="text" id="insertTodayDate" name="insertTodayDate"><br><br>';
+echo '<input type="date" id="insertDate" name="insertDate"><br><br>';
 echo '<input type="submit" value="Generate Template">';
 echo '</form>';
 
@@ -101,4 +101,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   echo $htmlBody;
   echo '</div>';
 }
-?>
