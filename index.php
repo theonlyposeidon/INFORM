@@ -95,7 +95,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   // Replace the variables in the HTML template
   $htmlBody = str_replace(array('{INSERTDATE}', '{INSERTTODAYDATE}'), array($insertDate, $insertTodayDate), $htmlTemplate);
 
-  // Display the generated HTML template
-  echo '<h2>Generated HTML Template:</h2>';
-  echo '<textarea rows="20" cols="80">' . $htmlBody . '</textarea>';
+  // Display the generated HTML template as a preview
+  echo '<h2>Generated HTML Template Preview:</h2>';
+  echo '<div style="border: 1px solid #ccc; padding: 10px; width: 620px;">';
+  echo $htmlBody;
+  echo '</div>';
 }
+?>
