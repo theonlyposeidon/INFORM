@@ -16,6 +16,7 @@ $notificationTexts = $data['notificationText'];
 <body>
 
 <div class="w-auto mx-auto" style="max-width: 800px;">
+  <h1> Outage Notification Template Generator</h1>
 <form>
   <div class="form-group row">
     <label for="informType" class="col-4 col-form-label">Inform Type</label> 
