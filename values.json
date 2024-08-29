@@ -15,5 +15,8 @@
     {"value": "ArcGIS", "label":"ArcGIS"},
     {"value": "Service@GMW", "label":"Service@GMW"},
     {"value": "Maximo", "label": "Maximo"}
+  ],
+  "notificationText": [
+    {"value": "unplannedOutage", "label": "is currently experiencing system issues. /n /n IT apologises for the disruption. We are working to resolve this problem and the issue a confirmation when the system(s) are available agian."}
   ]
 }

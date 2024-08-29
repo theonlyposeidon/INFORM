@@ -1,5 +1,5 @@
 <?php
-$data = json_decode(file_get_contents('values.json'), true);
+$data = json_decode(file_get_contents('data.json'), true);
 
 $informTypes = $data['informTypes'];
 $systemNames = $data['systemNames'];
@@ -10,6 +10,9 @@ $systemNames = $data['systemNames'];
 <head>
   <title>Goulburn-Murray Water</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <!-- Add a date picker library, such as Bootstrap Datepicker -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 </head>
 <body>
   <div class="container">
@@ -17,7 +20,7 @@ $systemNames = $data['systemNames'];
       <div class="form-group">
         <label for="informType" class="col-sm-2 control-label">INFORM Type:</label>
         <div class="col-sm-10">
-          <select id="informType" name="informType" class="form-control">
+          <select id="informType" name="informType" class="form-control" onchange="updateNotificationText(this.value)">
             <?php foreach ($informTypes as $type) { ?>
               <option value="<?php echo $type['value']; ?>"><?php echo $type['label']; ?></option>
             <?php } ?>
@@ -34,8 +37,33 @@ $systemNames = $data['systemNames'];
           </select>
         </div>
       </div>
+      <div class="form-group">
+        <label for="date" class="col-sm-2 control-label">Date:</label>
+        <div class="col-sm-10">
+          <input type="text" id="date" name="date" class="form-control datepicker">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="notificationText" class="col-sm-2 control-label">Notification Text:</label>
+        <div class="col-sm-10">
+          <input type="text" id="notificationText" name="notificationText" class="form-control">
+        </div>
+      </div>
       <!-- Rest of the form fields -->
     </form>
   </div>
+
+  <script>
+    function updateNotificationText(informTypeValue) {
+      var notificationText = document.getElementById('notificationText');
+      var informTypes = <?php echo json_encode($informTypes); ?>;
+      for (var i = 0; i < informTypes.length; i++) {
+        if (informTypes[i].value === informTypeValue) {
+          notificationText.value = informTypes[i].label;
+          break;
+        }
+      }
+    }
+  </script>
 </body>
 </html>
