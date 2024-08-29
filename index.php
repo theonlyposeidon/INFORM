@@ -1,5 +1,5 @@
 <?php
-$data = json_decode(file_get_contents('data.json'), true);
+$data = json_decode(file_get_contents('values.json'), true);
 
 $informTypes = $data['informTypes'];
 $systemNames = $data['systemNames'];
