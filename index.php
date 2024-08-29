@@ -3,6 +3,7 @@ $data = json_decode(file_get_contents('values.json'), true);
 
 $informTypes = $data['informTypes'];
 $systemNames = $data['systemNames'];
+$notificationTexts = $data['notificationText'];
 ?>
 
 <!DOCTYPE html>
@@ -56,10 +57,10 @@ $systemNames = $data['systemNames'];
   <script>
     function updateNotificationText(informTypeValue) {
       var notificationText = document.getElementById('notificationText');
-      var informTypes = <?php echo json_encode($informTypes); ?>;
-      for (var i = 0; i < informTypes.length; i++) {
-        if (informTypes[i].value === informTypeValue) {
-          notificationText.value = informTypes[i].label;
+      var notificationTexts = <?php echo json_encode($notificationTexts); ?>;
+      for (var i = 0; i < notificationTexts.length; i++) {
+        if (notificationTexts[i].value === informTypeValue) {
+          notificationText.value = notificationTexts[i].label;
           break;
         }
       }
