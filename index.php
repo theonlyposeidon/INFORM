@@ -15,7 +15,7 @@ $notificationTexts = $data['notificationText'];
 </head>
 <body>
 
-<div id="content">
+<div class="w-auto mx-auto" style="max-width: 800px;">
 <form>
   <div class="form-group row">
     <label for="informType" class="col-4 col-form-label">Inform Type</label> 
