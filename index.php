@@ -32,40 +32,40 @@ $notificationTexts = $data['notificationText'];
   <div class="form-group row">
     <label class="col-4">System(s)</label> 
     <div class="col-8">
-      <div class="custom-control custom-radio custom-control-inline">
-        <input name="systemName" id="systemName_0" type="radio" class="custom-control-input" value="agresso"> 
+      <div class="custom-control custom-checkbox custom-control-inline">
+        <input name="systemName" id="systemName_0" type="checkbox" class="custom-control-input" value="agresso"> 
         <label for="systemName_0" class="custom-control-label">Agresso</label>
       </div>
-      <div class="custom-control custom-radio custom-control-inline">
-        <input name="systemName" id="systemName_1" type="radio" class="custom-control-input" value="aquarius"> 
+      <div class="custom-control custom-checkbox custom-control-inline">
+        <input name="systemName" id="systemName_1" type="checkbox" class="custom-control-input" value="aquarius"> 
         <label for="systemName_1" class="custom-control-label">Aquarius</label>
       </div>
-      <div class="custom-control custom-radio custom-control-inline">
-        <input name="systemName" id="systemName_2" type="radio" class="custom-control-input" value="citrix"> 
+      <div class="custom-control custom-checkbox custom-control-inline">
+        <input name="systemName" id="systemName_2" type="checkbox" class="custom-control-input" value="citrix"> 
         <label for="systemName_2" class="custom-control-label">Citrix</label>
       </div>
-      <div class="custom-control custom-radio custom-control-inline">
-        <input name="systemName" id="systemName_3" type="radio" class="custom-control-input" value="few-hyfm"> 
+      <div class="custom-control custom-checkbox custom-control-inline">
+        <input name="systemName" id="systemName_3" type="checkbox" class="custom-control-input" value="few-hyfm"> 
         <label for="systemName_3" class="custom-control-label">FEWS/HyFM</label>
       </div>
-      <div class="custom-control custom-radio custom-control-inline">
-        <input name="systemName" id="systemName_4" type="radio" class="custom-control-input" value="fileservices"> 
+      <div class="custom-control custom-checkbox custom-control-inline">
+        <input name="systemName" id="systemName_4" type="checkbox" class="custom-control-input" value="fileservices"> 
         <label for="systemName_4" class="custom-control-label">File Servers/Mapped Drives</label>
       </div>
-      <div class="custom-control custom-radio custom-control-inline">
-        <input name="systemName" id="systemName_5" type="radio" class="custom-control-input" value="geocortex"> 
+      <div class="custom-control custom-checkbox custom-control-inline">
+        <input name="systemName" id="systemName_5" type="checkbox" class="custom-control-input" value="geocortex"> 
         <label for="systemName_5" class="custom-control-label">Geocortex</label>
       </div>
-      <div class="custom-control custom-radio custom-control-inline">
-        <input name="systemName" id="systemName_6" type="radio" class="custom-control-input" value="arcgis"> 
+      <div class="custom-control custom-checkbox custom-control-inline">
+        <input name="systemName" id="systemName_6" type="checkbox" class="custom-control-input" value="arcgis"> 
         <label for="systemName_6" class="custom-control-label">ArcGIS</label>
       </div>
-      <div class="custom-control custom-radio custom-control-inline">
-        <input name="systemName" id="systemName_7" type="radio" class="custom-control-input" value="heat"> 
+      <div class="custom-control custom-checkbox custom-control-inline">
+        <input name="systemName" id="systemName_7" type="checkbox" class="custom-control-input" value="heat"> 
         <label for="systemName_7" class="custom-control-label">Service@GMW</label>
       </div>
-      <div class="custom-control custom-radio custom-control-inline">
-        <input name="systemName" id="systemName_8" type="radio" class="custom-control-input" value="maximo"> 
+      <div class="custom-control custom-checkbox custom-control-inline">
+        <input name="systemName" id="systemName_8" type="checkbox" class="custom-control-input" value="maximo"> 
         <label for="systemName_8" class="custom-control-label">Maximo</label>
       </div>
     </div>
