@@ -15,6 +15,7 @@ $notificationTexts = $data['notificationText'];
 </head>
 <body>
 
+<div id="content">
 <form>
   <div class="form-group row">
     <label for="informType" class="col-4 col-form-label">Inform Type</label> 
@@ -96,6 +97,7 @@ $notificationTexts = $data['notificationText'];
       <button name="submit" type="submit" class="btn btn-primary">Submit</button>
     </div>
   </div>
+</div>
 </form>
 </body>
 </html>
