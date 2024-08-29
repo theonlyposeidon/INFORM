@@ -30,7 +30,7 @@ $notificationTexts = $data['notificationText'];
         <label class="form-label d-block">System(s)</label>
         <?php foreach ($systemNames as $name) { ?>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" id="<?php echo $name['value']; ?>" type="checkbox" name="systemS" data-sb-validations="required" />
+            <input class="form-check-input" id="<?php echo $name['value']; ?>" type="checkbox" name="systemS[]" data-sb-validations="required" />
             <label class="form-check-label" for="<?php echo $name['value']; ?>"><?php echo $name['label']; ?></label>
           </div>
         <?php } ?>
@@ -70,13 +70,6 @@ $notificationTexts = $data['notificationText'];
       </div>
     </form>
   </div>
-
-  <script>
-    function updateNotificationText(informTypeValue) {
-      var notificationText = document.getElementById('notificationText');
-      var notificationTexts = <?php echo json_encode($notificationTexts); ?>;
-      for (var i = 0; i < notificationTexts.length; i++) {
-        if (
 
   <script>
     function updateNotificationText(informTypeValue) {
