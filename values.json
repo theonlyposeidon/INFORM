@@ -1,0 +1,13 @@
+{
+  "informTypes": [
+    {"value": "unplannedOutage", "label": "Unplanned Outage"},
+    {"value": "plannedOutage", "label": "Planning Outage"},
+    {"value": "resolveOutage", "label": "Outage Resolved"}
+    {"value": "
+  ],
+  "systemNames": [
+    {"value": "System 1", "label": "System 1"},
+    {"value": "System 2", "label": "System 2"},
+    {"value": "System 3", "label": "System 3"}
+  ]
+}
