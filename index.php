@@ -1,3 +1,10 @@
+<?php
+$data = json_decode(file_get_contents('data.json'), true);
+
+$informTypes = $data['informTypes'];
+$systemNames = $data['systemNames'];
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,29 +18,23 @@
         <label for="informType" class="col-sm-2 control-label">INFORM Type:</label>
         <div class="col-sm-10">
           <select id="informType" name="informType" class="form-control">
-            <option value="unplannedOutage">Unplanned Outage - System Name</option>
-            <option value="plannedOutage">Planning Outage - System Name, DATE</option>
-            <option value="newProcedure">New Procedure</option>
+            <?php foreach ($informTypes as $type) { ?>
+              <option value="<?php echo $type['value']; ?>"><?php echo $type['label']; ?></option>
+            <?php } ?>
           </select>
         </div>
       </div>
       <div class="form-group">
         <label for="systemName" class="col-sm-2 control-label">System Name:</label>
         <div class="col-sm-10">
-          <input type="text" id="systemName" name="systemName" class="form-control">
+          <select id="systemName" name="systemName" class="form-control">
+            <?php foreach ($systemNames as $name) { ?>
+              <option value="<?php echo $name['value']; ?>"><?php echo $name['label']; ?></option>
+            <?php } ?>
+          </select>
         </div>
       </div>
-      <div class="form-group">
-        <label for="insertDate" class="col-sm-2 control-label">Insert Date:</label>
-        <div class="col-sm-10">
-          <input type="date" id="insertDate" name="insertDate" class="form-control">
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-          <input type="submit" value="Generate Template" class="btn btn-primary">
-        </div>
-      </div>
+      <!-- Rest of the form fields -->
     </form>
   </div>
 </body>

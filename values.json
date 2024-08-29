@@ -1,13 +1,19 @@
 {
   "informTypes": [
     {"value": "unplannedOutage", "label": "Unplanned Outage"},
-    {"value": "plannedOutage", "label": "Planning Outage"},
-    {"value": "resolveOutage", "label": "Outage Resolved"}
-    {"value": "
+    {"value": "plannedOutage", "label": "Planned Outage"},
+    {"value": "resolveUnplannedOutage", "label": "Unplanned Outage Resolved"},
+    {"value": "resolvePlannedOutage","label": "Planned Outage Completed"}
   ],
   "systemNames": [
-    {"value": "System 1", "label": "System 1"},
-    {"value": "System 2", "label": "System 2"},
-    {"value": "System 3", "label": "System 3"}
+    {"value": "Agresso", "label": "Agresso"},
+    {"value": "Aquarius", "label": "Aquarius"},
+    {"value": "Citrix", "label": "Citrix"},
+    {"value": "FEWS/HyFM", "label": "FEWS/HyFM"},
+    {"value": "FileServices", "label": "File Servers/Mapped Drives"},
+    {"value": "GeoCortex", "label": "GeoCortex"},
+    {"value": "ArcGIS", "label":"ArcGIS"},
+    {"value": "Service@GMW", "label":"Service@GMW"},
+    {"value": "Maximo", "label": "Maximo"}
   ]
 }
