@@ -10,78 +10,92 @@ $notificationTexts = $data['notificationText'];
 <html>
 <head>
   <title>Goulburn-Murray Water</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-  <!-- Add a date picker library, such as Bootstrap Datepicker -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"> 
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-  <div class="container px-5 my-5">
-    <form id="contactForm" data-sb-form-api-token="API_TOKEN">
-      <div class="mb-3">
-        <label class="form-label" for="informType">Inform Type</label>
-        <select class="form-select" id="informType" aria-label="Inform Type" onchange="updateNotificationText(this.value)">
-          <?php foreach ($informTypes as $type) { ?>
-            <option value="<?php echo $type['value']; ?>"><?php echo $type['label']; ?></option>
-          <?php } ?>
-        </select>
-      </div>
-      <div class="mb-3">
-        <label class="form-label d-block">System(s)</label>
-        <?php foreach ($systemNames as $name) { ?>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" id="<?php echo $name['value']; ?>" type="checkbox" name="systemS[]" data-sb-validations="required" />
-            <label class="form-check-label" for="<?php echo $name['value']; ?>"><?php echo $name['label']; ?></label>
-          </div>
-        <?php } ?>
-        <div class="invalid-feedback" data-sb-feedback="systemS:required">One option is required.</div>
-      </div>
-      <div class="mb-3">
-        <label class="form-label" for="notificationText">Notification Text</label>
-        <textarea class="form-control" id="notificationText" type="text" placeholder="Notification Text" style="height: 10rem;" data-sb-validations="required"></textarea>
-        <div class="invalid-feedback" data-sb-feedback="notificationText:required">Notification Text is required.</div>
-      </div>
-      <!-- Rest of the form fields -->
-      <div class="mb-3">
-        <label class="form-label" for="from">From</label>
-        <select class="form-select" id="from" aria-label="From">
-          <option value="Service Desk">Service Desk</option>
-          <option value="Infrastrucutre Team">Infrastrucutre Team</option>
-          <option value="Business Systems">Business Systems</option>
-        </select>
-      </div>
-      <div class="mb-3">
-        <label class="form-label" for="moreInfoBlurb">More Info Blurb</label>
-        <textarea class="form-control" id="moreInfoBlurb" type="text" placeholder="More Info Blurb" style="height: 10rem;" data-sb-validations="required"></textarea>
-        <div class="invalid-feedback" data-sb-feedback="moreInfoBlurb:required">More Info Blurb is required.</div>
-      </div>
-      <div class="d-none" id="submitSuccessMessage">
-        <div class="text-center mb-3">
-          <div class="fw-bolder">Form submission successful!</div>
-          <p>To activate this form, sign up at</p>
-          <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
-        </div>
-      </div>
-      <div class="d-none" id="submitErrorMessage">
-        <div class="text-center text-danger mb-3">Error sending message!</div>
-      </div>
-      <div class="d-grid">
-        <button class="btn btn-primary btn-lg disabled" id="submitButton" type="submit">Submit</button>
-      </div>
-    </form>
-  </div>
 
-  <script>
-    function updateNotificationText(informTypeValue) {
-      var notificationText = document.getElementById('notificationText');
-      var notificationTexts = <?php echo json_encode($notificationTexts); ?>;
-      for (var i = 0; i < notificationTexts.length; i++) {
-        if (notificationTexts[i].value === informTypeValue) {
-          notificationText.value = notificationTexts[i].label;
-          break;
-        }
-      }
-    }
-  </script>
+<form>
+  <div class="form-group row">
+    <label for="informType" class="col-4 col-form-label">Inform Type</label> 
+    <div class="col-8">
+      <select id="informType" name="informType" class="custom-select" required="required">
+        <option value="unplannedOutage">Unplanned Outage</option>
+        <option value="plannedOutage">Planned Outage</option>
+        <option value="multipleOutage">Multiple Systems Outage</option>
+        <option value="resolvedUnplanned">Resolved Unplanned Outage</option>
+        <option value="completePlanned">Planned Outage Completed</option>
+      </select>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-4">System(s)</label> 
+    <div class="col-8">
+      <div class="custom-control custom-radio custom-control-inline">
+        <input name="systemName" id="systemName_0" type="radio" class="custom-control-input" value="agresso"> 
+        <label for="systemName_0" class="custom-control-label">Agresso</label>
+      </div>
+      <div class="custom-control custom-radio custom-control-inline">
+        <input name="systemName" id="systemName_1" type="radio" class="custom-control-input" value="aquarius"> 
+        <label for="systemName_1" class="custom-control-label">Aquarius</label>
+      </div>
+      <div class="custom-control custom-radio custom-control-inline">
+        <input name="systemName" id="systemName_2" type="radio" class="custom-control-input" value="citrix"> 
+        <label for="systemName_2" class="custom-control-label">Citrix</label>
+      </div>
+      <div class="custom-control custom-radio custom-control-inline">
+        <input name="systemName" id="systemName_3" type="radio" class="custom-control-input" value="few-hyfm"> 
+        <label for="systemName_3" class="custom-control-label">FEWS/HyFM</label>
+      </div>
+      <div class="custom-control custom-radio custom-control-inline">
+        <input name="systemName" id="systemName_4" type="radio" class="custom-control-input" value="fileservices"> 
+        <label for="systemName_4" class="custom-control-label">File Servers/Mapped Drives</label>
+      </div>
+      <div class="custom-control custom-radio custom-control-inline">
+        <input name="systemName" id="systemName_5" type="radio" class="custom-control-input" value="geocortex"> 
+        <label for="systemName_5" class="custom-control-label">Geocortex</label>
+      </div>
+      <div class="custom-control custom-radio custom-control-inline">
+        <input name="systemName" id="systemName_6" type="radio" class="custom-control-input" value="arcgis"> 
+        <label for="systemName_6" class="custom-control-label">ArcGIS</label>
+      </div>
+      <div class="custom-control custom-radio custom-control-inline">
+        <input name="systemName" id="systemName_7" type="radio" class="custom-control-input" value="heat"> 
+        <label for="systemName_7" class="custom-control-label">Service@GMW</label>
+      </div>
+      <div class="custom-control custom-radio custom-control-inline">
+        <input name="systemName" id="systemName_8" type="radio" class="custom-control-input" value="maximo"> 
+        <label for="systemName_8" class="custom-control-label">Maximo</label>
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="notificationText" class="col-4 col-form-label">Main Message</label> 
+    <div class="col-8">
+      <textarea id="notificationText" name="notificationText" cols="40" rows="6" class="form-control"></textarea>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="signOff" class="col-4 col-form-label">Signature</label> 
+    <div class="col-8">
+      <select id="signOff" name="signOff" class="custom-select">
+        <option value="serviceDesk">Service Desk</option>
+        <option value="infrastructure">Infrastructure</option>
+        <option value="businessSystems">Business Systems</option>
+      </select>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-4"></label> 
+    <div class="col-8">
+      <textarea id="signature Text" name="signature Text" cols="40" rows="2" class="form-control"></textarea>
+    </div>
+  </div> 
+  <div class="form-group row">
+    <div class="offset-4 col-8">
+      <button name="submit" type="submit" class="btn btn-primary">Submit</button>
+    </div>
+  </div>
+</form>
 </body>
 </html>
