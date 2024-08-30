@@ -4,11 +4,8 @@ $data = json_decode(file_get_contents('values.json'), true);
 $informTypes = $data['informTypes'];
 $systemNames = $data['systemNames'];
 $notificationTexts = $data['notificationText'];
-foreach ($informTypes as $type) {
-echo $type['label'];
-}
+$signatureText = $data['signatureText'];
 ?>
-
 
 <!DOCTYPE html>
 <html>
@@ -86,37 +83,37 @@ echo $type['label'];
 </div>
 </form>
 <script>
-const notificationSelect = document.getElementById('notification');
-const notificationTextarea = document.getElementById('notificationText');
-const notificationTextData = <?php echo json_encode($notificationText); ?>;
+  const informTypes = <?php echo json_encode($data['informTypes']); ?>;
+  const notificationTexts = <?php echo json_encode($data['notificationText']); ?>;
+  const notificationTextarea = document.getElementById('notificationText');
+  const signatureTextarea = document.getElementById('signOff');
+  const signatureTexts = <?php echo json_encode($data['signatureText']);?>;
 
-const signOffSelect = document.getElementById('signOff');
-const signatureTextarea = document.getElementById('signatureText');
-const signatureTextData = <?php echo json_encode($signatureText); ?>;
-
-notificationSelect.addEventListener('change', function() {
-  const selectedNotification = notificationSelect.value;
-  const notificationText = notificationTextData.find(function(item) {
-    return item.value === selectedNotification;
+  document.addEventListener('DOMContentLoaded', function() {
+    const informTypeSelect = document.querySelector('select[name="informType"]');
+    informTypeSelect.addEventListener('change', function() {
+      const selectedInformType = this.value;
+      const selectedNotificationText = notificationTexts.find(text => text.value === selectedInformType);
+      if (selectedNotificationText) {
+        notificationTextarea.value = selectedNotificationText.label;
+      } else {
+        notificationTextarea.value = ''; // or some default value
+      }
+    });
   });
-  if (notificationText) {
-    notificationTextarea.value = notificationText.label;
-  } else {
-    notificationTextarea.value = '';
-  }
-});
 
-signOffSelect.addEventListener('change', function() {
-  const selectedSignOff = signOffSelect.value;
-  const signatureText = signatureTextData.find(function(item) {
-    return item.value === selectedSignOff;
+  document.addEventListener('DOMContentLoaded', function() {
+    const signatureSelect = document.querySelector('select[name="signOff"]');
+    signatureSelect.addEventListener('change', function() {
+      const selectedSignature = this.value;
+      const selectedSignatureText = signatureTexts.find(text => text.value === selectedSignature);
+      if (selectedSignatureText) {
+        signatureTextarea.value = selectedSignatureText.label;
+      } else {
+        signatureTextarea.value = ''; // or some default value
+      }
+    });
   });
-  if (signatureText) {
-    signatureTextarea.value = signatureText.label;
-  } else {
-    signatureTextarea.value = '';
-  }
-});
 </script>
 </body>
 </html>
