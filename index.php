@@ -29,7 +29,7 @@ echo $type['label'];
         <?php
         foreach ($informTypes as $type) {
           ?>
-            <option value="<?php echo $type['value'] ?>">"<?php echo $type['label']?>"</option>"
+            <option value="<?php echo $type['value'] ?>"><?php echo $type['label']?></option>"
           <?php
         }
         ?>
@@ -58,6 +58,20 @@ echo $type['label'];
       <textarea id="notificationText" name="notificationText" cols="40" rows="6" class="form-control"></textarea>
     </div>
   </div>
+
+<script>
+  const informTypes = <?php echo json_encode($data['informTypes']); ?>;
+  const notificationText = document.getElementById('notificationText');
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const informTypeSelect = document.querySelector('select[name="informType"]');
+    informTypeSelect.addEventListener('change', function() {
+      const selectedInformType = this.value;
+      const selectedInformTypeLabel = informTypes.find(type => type.value === selectedInformType).label;
+      notificationText.value = selectedInformTypeLabel;
+    });
+  });
+</script>
   <div class="form-group row">
     <label for="signOff" class="col-4 col-form-label">Signature</label> 
     <div class="col-8">
