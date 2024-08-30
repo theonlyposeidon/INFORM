@@ -19,5 +19,10 @@
   "notificationText": [
     {"value": "unplannedOutage", "label": "is currently experiencing system issues. \n\n IT apologises for the disruption. We are working to resolve this problem and the issue a confirmation when the system(s) are available agian."},
     {"value": "plannedOutage", "label": "will be unavailable on [Day] between [time1] and [time2]. During this time the system will be available."}
+  ],
+  "signatureText": [
+    {"value": "serviceDesk", "label": "If you have any questions, please contact the Service Desk of 03 5826 3699 or servicedesk@gmwater.com.au"},
+    {"value": "infrastructure", "label": "If you have any questions, please contact a member of the Infrastructure Team BAF_ICTInfrastructure@gmwater.com.au"},
+    {"value": "businessSystems", "label": "Business Systems Team"}
   ]
 }
