@@ -26,6 +26,7 @@ echo $type['label'];
     <label for="informType" class="col-4 col-form-label">Inform Type</label> 
     <div class="col-8">
       <select id="informType" name="informType" class="custom-select" required="required">
+        <option value="">Select an inform type</option>
         <?php
         foreach ($informTypes as $type) {
           ?>
@@ -59,24 +60,7 @@ echo $type['label'];
     </div>
   </div>
 
-  <script>
-  const informTypes = <?php echo json_encode($data['informTypes']); ?>;
-  const notificationTexts = <?php echo json_encode($data['notificationText']); ?>;
-  const notificationTextarea = document.getElementById('notificationText');
 
-  document.addEventListener('DOMContentLoaded', function() {
-    const informTypeSelect = document.querySelector('select[name="informType"]');
-    informTypeSelect.addEventListener('change', function() {
-      const selectedInformType = this.value;
-      const selectedNotificationText = notificationTexts.find(text => text.value === selectedInformType);
-      if (selectedNotificationText) {
-        notificationTextarea.value = selectedNotificationText.label;
-      } else {
-        notificationTextarea.value = ''; // or some default value
-      }
-    });
-  });
-</script>
 
   <div class="form-group row">
     <label for="signOff" class="col-4 col-form-label">Signature</label> 
@@ -101,5 +85,23 @@ echo $type['label'];
   </div>
 </div>
 </form>
+<script>
+  const informTypes = <?php echo json_encode($data['informTypes']); ?>;
+  const notificationTexts = <?php echo json_encode($data['notificationText']); ?>;
+  const notificationTextarea = document.getElementById('notificationText');
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const informTypeSelect = document.querySelector('select[name="informType"]');
+    informTypeSelect.addEventListener('change', function() {
+      const selectedInformType = this.value;
+      const selectedNotificationText = notificationTexts.find(text => text.value === selectedInformType);
+      if (selectedNotificationText) {
+        notificationTextarea.value = selectedNotificationText.label;
+      } else {
+        notificationTextarea.value = ''; // or some default value
+      }
+    });
+  });
+</script>
 </body>
 </html>
