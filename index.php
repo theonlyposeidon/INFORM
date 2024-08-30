@@ -49,105 +49,6 @@ $signOffTypes = $data['signOffTypes'];
   });
 });
 
-function updatePreviewPanel() {
-  // Get the values of the form fields
-  var informType = document.querySelector('select[name="informType"]').value;
-  var systemName = document.querySelector('input[name="systemName"]').value;
-  var insertDate = document.querySelector('input[name="insertDate"]').value;
-  var notificationText = document.querySelector('textarea[name="notificationText"]').value;
-  var signatureText = document.querySelector('textarea[name="signatureText"]').value;
-  var signOff = document.querySelector('select[name="signOff"]').value;
-
-  // Generate the INFORM message based on the user's selection
-  var informMessage;
-  switch (informType) {
-    case 'unplannedOutage':
-      informMessage = "INFORM: Unplanned Outage - " + systemName;
-      break;
-    case 'plannedOutage':
-      informMessage = "INFORM: Planning Outage - " + systemName + ", " + insertDate;
-      break;
-    case 'newProcedure':
-      informMessage = "INFORM: New Procedure";
-      break;
-  }
-
-  // Create a new HTML template with the updated values
-  var htmlTemplate = `
-    <div class="header">
-      <img class="logo" src="images/image001.png" alt="Goulburn-Murray Water Logo">
-    </div>
-    <div class="date">
-      ${new Date().toLocaleDateString('en-AU', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}
-    </div>
-    <div class="container">
-      <div class="info">
-        <h2 class="heading">${informMessage}</h2>
-        <p>${notificationText}</p>
-      </div>
-
-      <div class="footer">
-        <p>${signatureText}</p>
-        <p><b>${signOff}<br>
-        Information Technology<br>
-        Business and Finance</b></p>
-      </div>
-    </div>
-  `;
-
-  // Update the preview panel with the new HTML template
-  document.getElementById('preview-panel').innerHTML = htmlTemplate;
-};
-
-document.querySelector('select[name="informType"]').addEventListener('change', updatePreviewPanel);
-document.querySelector('input[name="systemName"]').addEventListener('input', updatePreviewPanel);
-document.querySelector('input[name="insertDate"]').addEventListener('input', updatePreviewPanel);
-document.querySelector('textarea[name="notificationText"]').addEventListener('input', updatePreviewPanel);
-document.querySelector('textarea[name="signatureText"]').addEventListener('input', updatePreviewPanel);
-document.querySelector('select[name="signOff"]').addEventListener('change', updatePreviewPanel);
-
-// Get the informMessage textarea
-const informMessageTextarea = document.getElementById('informMessage');
-
-// Add event listener to informType select
-document.querySelector('select[name="informType"]').addEventListener('change', updateInformMessage);
-
-// Add event listener to systemName checkboxes
-document.querySelectorAll('input[name="systemName"]').forEach(checkbox => {
-  checkbox.addEventListener('change', updateInformMessage);
-});
-
-// Function to update informMessage
-function updateInformMessage() {
-  // Get the selected informType
-  const selectedInformType = document.querySelector('select[name="informType"]').value;
-
-  // Get the selected systemNames
-  const selectedSystemNames = [];
-  document.querySelectorAll('input[name="systemName"]:checked').forEach(checkbox => {
-    selectedSystemNames.push(checkbox.value);
-  });
-
-  // Generate the informMessage based on the selected informType and systemNames
-  let informMessage;
-  switch (selectedInformType) {
-    case 'unplannedOutage':
-      informMessage = "INFORM: Unplanned Outage - " + selectedSystemNames.join(', ');
-      break;
-    case 'plannedOutage':
-      informMessage = "INFORM: Planned Outage - " + selectedSystemNames.join(', ') + ", " + document.querySelector('input[name="insertDate"]').value;
-      break;
-    case 'newProcedure':
-      informMessage = "INFORM: New Procedure";
-      break;
-    default:
-      informMessage = '';
-  }
-
-  // Update the informMessage textarea
-  informMessageTextarea.value = informMessage;
-}
-
 </script>
 
 <div class="w-auto mx-auto" style="max-width: 800px;">
@@ -189,7 +90,7 @@ function updateInformMessage() {
       <div class="form-group row">
         <label for="informMessage" class="col-4 col-form-label">INFORM: Message</label> 
         <div class="col-8">
-          <textarea id="informMessage" name="informMessage" cols="40" rows="6" class="form-control"></textarea>
+          <textarea id="informMessage" name="informMessage" cols="40" rows="1" class="form-control"></textarea>
         </div>
       </div>
       <div class="form-group row">
