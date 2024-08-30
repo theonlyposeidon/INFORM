@@ -17,6 +17,7 @@
     {"value": "Maximo", "label": "Maximo"}
   ],
   "notificationText": [
-    {"value": "unplannedOutage", "label": "is currently experiencing system issues. /n /n IT apologises for the disruption. We are working to resolve this problem and the issue a confirmation when the system(s) are available agian."}
+    {"value": "unplannedOutage", "label": "is currently experiencing system issues. /n /n IT apologises for the disruption. We are working to resolve this problem and the issue a confirmation when the system(s) are available agian."},
+    {"value": "plannedOutage", "label": "will be unavailable on [Day] between [time1] and [time2]. During this time the system will be available."}
   ]
 }

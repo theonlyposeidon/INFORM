@@ -59,19 +59,25 @@ echo $type['label'];
     </div>
   </div>
 
-<script>
+  <script>
   const informTypes = <?php echo json_encode($data['informTypes']); ?>;
-  const notificationText = document.getElementById('notificationText');
+  const notificationTexts = <?php echo json_encode($data['notificationText']); ?>;
+  const notificationTextarea = document.getElementById('notificationText');
 
   document.addEventListener('DOMContentLoaded', function() {
     const informTypeSelect = document.querySelector('select[name="informType"]');
     informTypeSelect.addEventListener('change', function() {
       const selectedInformType = this.value;
-      const selectedInformTypeLabel = informTypes.find(type => type.value === selectedInformType).label;
-      notificationText.value = selectedInformTypeLabel;
+      const selectedNotificationText = notificationTexts.find(text => text.value === selectedInformType);
+      if (selectedNotificationText) {
+        notificationTextarea.value = selectedNotificationText.label;
+      } else {
+        notificationTextarea.value = ''; // or some default value
+      }
     });
   });
 </script>
+
   <div class="form-group row">
     <label for="signOff" class="col-4 col-form-label">Signature</label> 
     <div class="col-8">
