@@ -64,9 +64,14 @@ $signOffTypes = $data['signOffTypes'];
     <label for="signOff" class="col-4 col-form-label">Signature</label> 
     <div class="col-8">
       <select id="signOff" name="signOff" class="custom-select">
-        <option value="serviceDesk">Service Desk</option>
-        <option value="infrastructure">Infrastructure</option>
-        <option value="businessSystems">Business Systems</option>
+        <option value="">Select From:</option>
+        <?php
+          foreach ($signOffTypes as $type) {
+        ?>
+        <option value="<?php echo $type['value'] ?>"><?php echo $type['label']?></option>"
+        <?php
+          }
+        ?>
       </select>
     </div>
   </div>
@@ -87,7 +92,6 @@ $signOffTypes = $data['signOffTypes'];
   const informTypes = <?php echo json_encode($data['informTypes']); ?>;
   const notificationTexts = <?php echo json_encode($data['notificationText']); ?>;
   const notificationTextarea = document.getElementById('notificationText');
-  const signOffTypes = <?php echo json_encode($data['signOffType']); ?>;
   const signOffSelect = document.getElementById('signOff');
   const signatureTextarea = document.getElementById('signatureText');
   const signatureTexts = <?php echo json_encode($signatureTexts); ?>;
