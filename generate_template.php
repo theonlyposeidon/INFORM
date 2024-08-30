@@ -63,12 +63,12 @@ $htmlTemplate = <<<EOT
   <div class="container">
     <div class="info">
       <h2 class="heading">{INFORMMESSAGE}</h2>
-      <p>Please note that patching will be commencing this week in Test. Production patching is scheduled for next {INSERTDATE}. Please ensure TDC systems are tested prior to next Wednesday.</p>
+      <p>{NOTIFICATIONTEXT}</p>
     </div>
 
     <div class="footer">
-      <p>If you have any questions, please contact a member from the Infrastructure Team or <a href="mailto:BAF_ICTInfrastructure@gmwater.com.au">BAF_ICTInfrastructure@gmwater.com.au</a></p>
-      <p><b>Infrastructure Team<br>
+      <p>{SIGNATURETEXT}</p>
+      <p><b>{SIGNOFF}<br>
       Information Technology<br>
       Business and Finance</b></p>
     </div>
