@@ -1,10 +1,14 @@
 <?php
-$data = json_decode(file_get_contents('data.json'), true);
+$data = json_decode(file_get_contents('values.json'), true);
 
 $informTypes = $data['informTypes'];
 $systemNames = $data['systemNames'];
 $notificationTexts = $data['notificationText'];
+foreach ($informTypes as $type) {
+echo $type['label'];
+}
 ?>
+
 
 <!DOCTYPE html>
 <html>
@@ -22,53 +26,30 @@ $notificationTexts = $data['notificationText'];
     <label for="informType" class="col-4 col-form-label">Inform Type</label> 
     <div class="col-8">
       <select id="informType" name="informType" class="custom-select" required="required">
-        <option value="unplannedOutage">Unplanned Outage</option>
-        <option value="plannedOutage">Planned Outage</option>
-        <option value="multipleOutage">Multiple Systems Outage</option>
-        <option value="resolvedUnplanned">Resolved Unplanned Outage</option>
-        <option value="completePlanned">Planned Outage Completed</option>
+        <?php
+        foreach ($informTypes as $type) {
+          ?>
+            <option value="<?php echo $type['value'] ?>">"<?php echo $type['label']?>"</option>"
+          <?php
+        }
+        ?>
       </select>
     </div>
   </div>
   <div class="form-group row">
     <label class="col-4">System(s)</label> 
     <div class="col-8">
-      <div class="custom-control custom-checkbox custom-control-inline">
-        <input name="systemName" id="systemName_0" type="checkbox" class="custom-control-input" value="agresso"> 
-        <label for="systemName_0" class="custom-control-label">Agresso</label>
-      </div>
-      <div class="custom-control custom-checkbox custom-control-inline">
-        <input name="systemName" id="systemName_1" type="checkbox" class="custom-control-input" value="aquarius"> 
-        <label for="systemName_1" class="custom-control-label">Aquarius</label>
-      </div>
-      <div class="custom-control custom-checkbox custom-control-inline">
-        <input name="systemName" id="systemName_2" type="checkbox" class="custom-control-input" value="citrix"> 
-        <label for="systemName_2" class="custom-control-label">Citrix</label>
-      </div>
-      <div class="custom-control custom-checkbox custom-control-inline">
-        <input name="systemName" id="systemName_3" type="checkbox" class="custom-control-input" value="few-hyfm"> 
-        <label for="systemName_3" class="custom-control-label">FEWS/HyFM</label>
-      </div>
-      <div class="custom-control custom-checkbox custom-control-inline">
-        <input name="systemName" id="systemName_4" type="checkbox" class="custom-control-input" value="fileservices"> 
-        <label for="systemName_4" class="custom-control-label">File Servers/Mapped Drives</label>
-      </div>
-      <div class="custom-control custom-checkbox custom-control-inline">
-        <input name="systemName" id="systemName_5" type="checkbox" class="custom-control-input" value="geocortex"> 
-        <label for="systemName_5" class="custom-control-label">Geocortex</label>
-      </div>
-      <div class="custom-control custom-checkbox custom-control-inline">
-        <input name="systemName" id="systemName_6" type="checkbox" class="custom-control-input" value="arcgis"> 
-        <label for="systemName_6" class="custom-control-label">ArcGIS</label>
-      </div>
-      <div class="custom-control custom-checkbox custom-control-inline">
-        <input name="systemName" id="systemName_7" type="checkbox" class="custom-control-input" value="heat"> 
-        <label for="systemName_7" class="custom-control-label">Service@GMW</label>
-      </div>
-      <div class="custom-control custom-checkbox custom-control-inline">
-        <input name="systemName" id="systemName_8" type="checkbox" class="custom-control-input" value="maximo"> 
-        <label for="systemName_8" class="custom-control-label">Maximo</label>
-      </div>
+      <?php
+      $systemNames = $data['systemNames'];
+      foreach ($systemNames as $i => $systemName) {
+          ?>
+          <div class="custom-control custom-checkbox custom-control-inline">
+            <input name="systemName" id="systemName_<?php echo $i ?>" type="checkbox" class="custom-control-input" value="<?php echo $systemName['value'] ?>"> 
+            <label for="systemName_<?php echo $i ?>" class="custom-control-label"><?php echo $systemName['label'] ?></label>
+          </div>
+          <?php
+      }
+      ?>
     </div>
   </div>
   <div class="form-group row">
