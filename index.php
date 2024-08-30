@@ -4,7 +4,7 @@ $data = json_decode(file_get_contents('values.json'), true);
 $informTypes = $data['informTypes'];
 $systemNames = $data['systemNames'];
 $notificationTexts = $data['notificationText'];
-$signatureText = $data['signatureText'];
+$signatureTexts = $data['signatureText'];
 ?>
 
 <!DOCTYPE html>
@@ -89,6 +89,7 @@ $signatureText = $data['signatureText'];
   const signOffTypes = <?php echo json_encode($data['signOffType']); ?>;
   const signOffSelect = document.getElementById('signOff');
   const signatureTextarea = document.getElementById('signatureText');
+  const signatureTexts = <?php echo json_encode($signatureTexts); ?>;
 
   document.addEventListener('DOMContentLoaded', function() {
     const informTypeSelect = document.querySelector('select[name="informType"]');
