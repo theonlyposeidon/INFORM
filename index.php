@@ -86,8 +86,9 @@ $signatureText = $data['signatureText'];
   const informTypes = <?php echo json_encode($data['informTypes']); ?>;
   const notificationTexts = <?php echo json_encode($data['notificationText']); ?>;
   const notificationTextarea = document.getElementById('notificationText');
-  const signatureTextarea = document.getElementById('signOff');
-  const signatureTexts = <?php echo json_encode($data['signatureText']);?>;
+  const signOffTypes = <?php echo json_encode($data['signOffType']); ?>;
+  const signOffSelect = document.getElementById('signOff');
+  const signatureTextarea = document.getElementById('signatureText');
 
   document.addEventListener('DOMContentLoaded', function() {
     const informTypeSelect = document.querySelector('select[name="informType"]');
@@ -103,17 +104,16 @@ $signatureText = $data['signatureText'];
   });
 
   document.addEventListener('DOMContentLoaded', function() {
-    const signatureSelect = document.querySelector('select[name="signOff"]');
-    signatureSelect.addEventListener('change', function() {
-      const selectedSignature = this.value;
-      const selectedSignatureText = signatureTexts.find(text => text.value === selectedSignature);
-      if (selectedSignatureText) {
-        signatureTextarea.value = selectedSignatureText.label;
-      } else {
-        signatureTextarea.value = ''; // or some default value
-      }
-    });
+  signOffSelect.addEventListener('change', function() { // Use the correct variable
+    const selectedSignature = this.value;
+    const selectedSignatureText = signatureTexts.find(text => text.value === selectedSignature);
+    if (selectedSignatureText) {
+      signatureTextarea.value = selectedSignatureText.label;
+    } else {
+      signatureTextarea.value = ''; // or some default value
+    }
   });
+});
 </script>
 </body>
 </html>
