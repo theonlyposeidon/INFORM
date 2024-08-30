@@ -17,84 +17,6 @@ $signOffTypes = $data['signOffTypes'];
 </head>
 <body>
 
-<div class="w-auto mx-auto" style="max-width: 800px;">
-  <h1> Outage Notification Template Generator</h1>
-<div class="row">
-  <div class="col-8">
-    <form>
-      <div class="form-group row">
-        <label for="informType" class="col-4 col-form-label">Inform Type</label> 
-        <div class="col-8">
-          <select id="informType" name="informType" class="custom-select" required="required">
-            <option value="">Select an inform type</option>
-            <?php
-            foreach ($informTypes as $type) {
-              ?>
-                <option value="<?php echo $type['value'] ?>"><?php echo $type['label']?></option>"
-              <?php
-            }
-            ?>
-          </select>
-        </div>
-      </div>
-      <div class="form-group row">
-        <label class="col-4">System(s)</label> 
-        <div class="col-8">
-          <?php
-          $systemNames = $data['systemNames'];
-          foreach ($systemNames as $i => $systemName) {
-              ?>
-              <div class="custom-control custom-checkbox custom-control-inline">
-                <input name="systemName" id="systemName_<?php echo $i ?>" type="checkbox" class="custom-control-input" value="<?php echo $systemName['value'] ?>"> 
-                <label for="systemName_<?php echo $i ?>" class="custom-control-label"><?php echo $systemName['label'] ?></label>
-              </div>
-              <?php
-          }
-          ?>
-        </div>
-      </div>
-      <div class="form-group row">
-        <label for="notificationText" class="col-4 col-form-label">Main Message</label> 
-        <div class="col-8">
-          <textarea id="notificationText" name="notificationText" cols="40" rows="6" class="form-control"></textarea>
-        </div>
-      </div>
-
-
-
-      <div class="form-group row">
-        <label for="signOff" class="col-4 col-form-label">Signature</label> 
-        <div class="col-8">
-          <select id="signOff" name="signOff" class="custom-select">
-            <option value="">Select From:</option>
-            <?php
-              foreach ($signOffTypes as $type) {
-            ?>
-            <option value="<?php echo $type['value'] ?>"><?php echo $type['label']?></option>"
-            <?php
-              }
-            ?>
-          </select>
-        </div>
-      </div>
-      <div class="form-group row">
-        <label class="col-4"></label> 
-        <div class="col-8">
-          <textarea id="signatureText" name="signatureText" cols="40" rows="2" class="form-control"></textarea>
-        </div>
-      </div> 
-      <div class="form-group row">
-        <div class="offset-4 col-8">
-          <button name="submit" type="submit" class="btn btn-primary">Submit</button>
-        </div>
-      </div>
-    </div>
-    </form>
-  </div>
-  <div class="col-4">
-    <div id="preview-panel"></div>
-  </div>
-</div>          
 <script>
   const informTypes = <?php echo json_encode($data['informTypes']); ?>;
   const notificationTexts = <?php echo json_encode($data['notificationText']); ?>;
@@ -184,6 +106,134 @@ document.querySelector('textarea[name="notificationText"]').addEventListener('in
 document.querySelector('textarea[name="signatureText"]').addEventListener('input', updatePreviewPanel);
 document.querySelector('select[name="signOff"]').addEventListener('change', updatePreviewPanel);
 
+// Get the informMessage textarea
+const informMessageTextarea = document.getElementById('informMessage');
+
+// Add event listener to informType select
+document.querySelector('select[name="informType"]').addEventListener('change', updateInformMessage);
+
+// Add event listener to systemName checkboxes
+document.querySelectorAll('input[name="systemName"]').forEach(checkbox => {
+  checkbox.addEventListener('change', updateInformMessage);
+});
+
+// Function to update informMessage
+function updateInformMessage() {
+  // Get the selected informType
+  const selectedInformType = document.querySelector('select[name="informType"]').value;
+
+  // Get the selected systemNames
+  const selectedSystemNames = [];
+  document.querySelectorAll('input[name="systemName"]:checked').forEach(checkbox => {
+    selectedSystemNames.push(checkbox.value);
+  });
+
+  // Generate the informMessage based on the selected informType and systemNames
+  let informMessage;
+  switch (selectedInformType) {
+    case 'unplannedOutage':
+      informMessage = "INFORM: Unplanned Outage - " + selectedSystemNames.join(', ');
+      break;
+    case 'plannedOutage':
+      informMessage = "INFORM: Planned Outage - " + selectedSystemNames.join(', ') + ", " + document.querySelector('input[name="insertDate"]').value;
+      break;
+    case 'newProcedure':
+      informMessage = "INFORM: New Procedure";
+      break;
+    default:
+      informMessage = '';
+  }
+
+  // Update the informMessage textarea
+  informMessageTextarea.value = informMessage;
+}
+
 </script>
+
+<div class="w-auto mx-auto" style="max-width: 800px;">
+  <h1> Outage Notification Template Generator</h1>
+<div class="row">
+  <div class="col-8">
+    <form>
+      <div class="form-group row">
+        <label for="informType" class="col-4 col-form-label">Inform Type</label> 
+        <div class="col-8">
+          <select id="informType" name="informType" class="custom-select" required="required">
+            <option value="">Select an inform type</option>
+            <?php
+            foreach ($informTypes as $type) {
+              ?>
+                <option value="<?php echo $type['value'] ?>"><?php echo $type['label']?></option>"
+              <?php
+            }
+            ?>
+          </select>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-4">System(s)</label> 
+        <div class="col-8">
+          <?php
+          $systemNames = $data['systemNames'];
+          foreach ($systemNames as $i => $systemName) {
+              ?>
+              <div class="custom-control custom-checkbox custom-control-inline">
+                <input name="systemName" id="systemName_<?php echo $i ?>" type="checkbox" class="custom-control-input" value="<?php echo $systemName['value'] ?>"> 
+                <label for="systemName_<?php echo $i ?>" class="custom-control-label"><?php echo $systemName['label'] ?></label>
+              </div>
+              <?php
+          }
+          ?>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="informMessage" class="col-4 col-form-label">INFORM: Message</label> 
+        <div class="col-8">
+          <textarea id="informMessage" name="informMessage" cols="40" rows="6" class="form-control"></textarea>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="notificationText" class="col-4 col-form-label">Main Message</label> 
+        <div class="col-8">
+          <textarea id="notificationText" name="notificationText" cols="40" rows="6" class="form-control"></textarea>
+        </div>
+      </div>
+
+
+
+      <div class="form-group row">
+        <label for="signOff" class="col-4 col-form-label">Signature</label> 
+        <div class="col-8">
+          <select id="signOff" name="signOff" class="custom-select">
+            <option value="">Select From:</option>
+            <?php
+              foreach ($signOffTypes as $type) {
+            ?>
+            <option value="<?php echo $type['value'] ?>"><?php echo $type['label']?></option>"
+            <?php
+              }
+            ?>
+          </select>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-4"></label> 
+        <div class="col-8">
+          <textarea id="signatureText" name="signatureText" cols="40" rows="2" class="form-control"></textarea>
+        </div>
+      </div> 
+      <div class="form-group row">
+        <div class="offset-4 col-8">
+          <button name="submit" type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </div>
+    </div>
+    </form>
+  </div>
+  <div class="col-4">
+    <div id="preview-panel"></div>
+  </div>
+</div>          
+
 </body>
 </html>
