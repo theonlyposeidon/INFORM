@@ -17,39 +17,6 @@ $signOffTypes = $data['signOffTypes'];
 </head>
 <body>
 
-<script>
-  const informTypes = <?php echo json_encode($data['informTypes']); ?>;
-  const notificationTexts = <?php echo json_encode($data['notificationText']); ?>;
-  const notificationTextarea = document.getElementById('notificationText');
-  const signOffSelect = document.getElementById('signOff');
-  const signatureTextarea = document.getElementById('signatureText');
-  const signatureTexts = <?php echo json_encode($signatureTexts); ?>;
-  const signOffTypes = <?php echo json_encode($signOffTypes); ?>;
-
-  document.addEventListener('DOMContentLoaded', function() {
-  const informTypeSelect = document.querySelector('select[name="informType"]');
-  informTypeSelect.addEventListener('change', function() {
-    const selectedInformType = this.value;
-    const selectedNotificationText = notificationTexts.find(text => text.value === selectedInformType);
-    if (selectedNotificationText) {
-      notificationTextarea.value = selectedNotificationText.label;
-    } else {
-      notificationTextarea.value = ''; // or some default value
-    }
-  });
-
-  signOffSelect.addEventListener('change', function() {
-    const selectedSignature = this.value;
-    const selectedSignatureText = signatureTexts.find(text => text.value === selectedSignature);
-    if (selectedSignatureText) {
-      signatureTextarea.value = selectedSignatureText.label;
-    } else {
-      signatureTextarea.value = ''; // or some default value
-    }
-  });
-});
-
-</script>
 
 <div class="w-auto mx-auto" style="max-width: 800px;">
   <h1> Outage Notification Template Generator</h1>
@@ -135,6 +102,41 @@ $signOffTypes = $data['signOffTypes'];
     <div id="preview-panel"></div>
   </div>
 </div>          
+
+<script>
+  const informTypes = <?php echo json_encode($data['informTypes']); ?>;
+  const notificationTexts = <?php echo json_encode($data['notificationText']); ?>;
+  const notificationTextarea = document.getElementById('notificationText');
+  const signOffSelect = document.getElementById('signOff');
+  const signatureTextarea = document.getElementById('signatureText');
+  const signatureTexts = <?php echo json_encode($signatureTexts); ?>;
+  const signOffTypes = <?php echo json_encode($signOffTypes); ?>;
+
+  document.addEventListener('DOMContentLoaded', function() {
+  const informTypeSelect = document.querySelector('select[name="informType"]');
+  informTypeSelect.addEventListener('change', function() {
+    const selectedInformType = this.value;
+    const selectedNotificationText = notificationTexts.find(text => text.value === selectedInformType);
+    if (selectedNotificationText) {
+      notificationTextarea.value = selectedNotificationText.label;
+    } else {
+      notificationTextarea.value = ''; // or some default value
+    }
+  });
+
+  signOffSelect.addEventListener('change', function() {
+    const selectedSignature = this.value;
+    const selectedSignatureText = signatureTexts.find(text => text.value === selectedSignature);
+    if (selectedSignatureText) {
+      signatureTextarea.value = selectedSignatureText.label;
+    } else {
+      signatureTextarea.value = ''; // or some default value
+    }
+  });
+});
+
+</script>
+
 
 </body>
 </html>
