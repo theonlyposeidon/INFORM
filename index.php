@@ -100,7 +100,7 @@ $informMessages = $data['informMessages'];
     </form>
   </div>
   <div class="col-4">
-    <div id="preview-panel"></div>
+    <div id="preview-panel"><h3>Preview</h3></div>
   </div>
 </div>          
 
@@ -112,6 +112,8 @@ $informMessages = $data['informMessages'];
   const signatureTextarea = document.getElementById('signatureText');
   const signatureTexts = <?php echo json_encode($signatureTexts); ?>;
   const signOffTypes = <?php echo json_encode($signOffTypes); ?>;
+  const informMessages = <?php echo json_encode($data['informMessages']); ?>;
+  const informMessageTextarea = document.getElementById('informMessage');
 
   document.addEventListener('DOMContentLoaded', function() {
   const informTypeSelect = document.querySelector('select[name="informType"]');
@@ -134,29 +136,34 @@ $informMessages = $data['informMessages'];
       signatureTextarea.value = ''; // or some default value
     }
   });
-  informTypeSelect.addEventListener('change', function() {
-  const selectedInformType = this.value;
-  const selectedSystemName = systemNameSelect.value;
-  const selectedInformMessage = informMessages.find(message => message.value === selectedInformType);
-  if (selectedInformMessage) {
-    const label = selectedInformMessage.label.replace('{systemName}', selectedSystemName);
-    informMessageTextarea.value = label;
-  } else {
-    informMessageTextarea.value = ''; // or some default value
-  }
-});
+  const informTypeSelect = document.querySelector('select[name="informType"]');
+  const systemNameCheckboxes = document.querySelectorAll('input[name="systemName"]');
 
-systemNameSelect.addEventListener('change', function() {
-  const selectedInformType = informTypeSelect.value;
-  const selectedSystemName = this.value;
-  const selectedInformMessage = informMessages.find(message => message.value === selectedInformType);
-  if (selectedInformMessage) {
-    const label = selectedInformMessage.label.replace('{systemName}', selectedSystemName);
-    informMessageTextarea.value = label;
-  } else {
-    informMessageTextarea.value = ''; // or some default value
-  }
-});
+  informTypeSelect.addEventListener('change', function() {
+    const selectedInformType = this.value;
+    const selectedInformMessage = informMessages.find(message => message.value === selectedInformType);
+    if (selectedInformMessage) {
+      const checkedSystemNames = Array.from(systemNameCheckboxes).filter(checkbox => checkbox.checked).map(checkbox => checkbox.value);
+      const label = selectedInformMessage.label.replace('{systemName}', checkedSystemNames.join(', '));
+      informMessageTextarea.value = label;
+    } else {
+      informMessageTextarea.value = ''; // or some default value
+    }
+  });
+
+  systemNameCheckboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', function() {
+      const selectedInformType = informTypeSelect.value;
+      const selectedInformMessage = informMessages.find(message => message.value === selectedInformType);
+      if (selectedInformMessage) {
+        const checkedSystemNames = Array.from(systemNameCheckboxes).filter(checkbox => checkbox.checked).map(checkbox => checkbox.value);
+        const label = selectedInformMessage.label.replace('{systemName}', checkedSystemNames.join(', '));
+        informMessageTextarea.value = label;
+      } else {
+        informMessageTextarea.value = ''; // or some default value
+      }
+    });
+  });
 });
 
 </script>
