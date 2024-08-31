@@ -6,6 +6,7 @@ $systemNames = $data['systemNames'];
 $notificationTexts = $data['notificationText'];
 $signatureTexts = $data['signatureText'];
 $signOffTypes = $data['signOffTypes'];
+$informMessages = $data['informMessages'];
 ?>
 
 <!DOCTYPE html>
@@ -133,6 +134,29 @@ $signOffTypes = $data['signOffTypes'];
       signatureTextarea.value = ''; // or some default value
     }
   });
+  informTypeSelect.addEventListener('change', function() {
+  const selectedInformType = this.value;
+  const selectedSystemName = systemNameSelect.value;
+  const selectedInformMessage = informMessages.find(message => message.value === selectedInformType);
+  if (selectedInformMessage) {
+    const label = selectedInformMessage.label.replace('{systemName}', selectedSystemName);
+    informMessageTextarea.value = label;
+  } else {
+    informMessageTextarea.value = ''; // or some default value
+  }
+});
+
+systemNameSelect.addEventListener('change', function() {
+  const selectedInformType = informTypeSelect.value;
+  const selectedSystemName = this.value;
+  const selectedInformMessage = informMessages.find(message => message.value === selectedInformType);
+  if (selectedInformMessage) {
+    const label = selectedInformMessage.label.replace('{systemName}', selectedSystemName);
+    informMessageTextarea.value = label;
+  } else {
+    informMessageTextarea.value = ''; // or some default value
+  }
+});
 });
 
 </script>

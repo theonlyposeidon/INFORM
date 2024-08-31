@@ -29,5 +29,11 @@
     {"value": "serviceDesk", "label": "If you have any questions, please contact the Service Desk of 03 5826 3699 or servicedesk@gmwater.com.au"},
     {"value": "infrastructure", "label": "If you have any questions, please contact a member of the Infrastructure Team BAF_ICTInfrastructure@gmwater.com.au"},
     {"value": "businessSystems", "label": "Business Systems Team"}
+  ],
+  "informMessages": [
+    {"value": "unplannedOutage", "label": "INFORM: {systemName} Outage"},
+    {"value": "plannedOutage", "label": "INFORM: Planned Maintenance - {systemName}"},
+    {"value": "resolvePlannedOutage", "label": "All maintenance has now been completed"},
+    {"value": "resolveUnplannedOutage", "label": "INFORM: {systemName} outage has been resolved"}
   ]
 }
